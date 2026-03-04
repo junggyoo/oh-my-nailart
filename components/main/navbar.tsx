@@ -78,7 +78,9 @@ export default function Navbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const { user, loading, signOut } = useAuth();
 
-  if (pathname.startsWith("/auth")) return null;
+  const isDashboard = pathname.startsWith("/dashboard");
+
+  if (pathname.startsWith("/auth") || isDashboard) return null;
 
   return (
     <motion.header
@@ -88,16 +90,16 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="mx-auto max-w-6xl px-4 pt-4">
-        <nav className="relative flex items-center justify-between rounded-2xl border border-border/50 bg-background/60 px-5 py-3 shadow-lg shadow-black/[0.03] backdrop-blur-xl">
+        <nav className={`relative flex items-center justify-between rounded-2xl border px-5 py-3 shadow-lg backdrop-blur-xl ${isDashboard ? "border-white/[0.06] bg-[#181818]/80 shadow-black/10" : "border-border/50 bg-background/60 shadow-black/[0.03]"}`}>
           {/* Left: Logo + Text */}
-          <a href="/" className="flex items-center gap-2.5 group">
+          <a href={user ? "/dashboard" : "/"} className="flex items-center gap-2.5 group">
             <motion.div
               whileHover={{ rotate: [0, -8, 8, 0] }}
               transition={{ duration: 0.5 }}
             >
               <NailArtLogo />
             </motion.div>
-            <span className="font-[family-name:var(--font-indie-flower)] text-xl font-bold tracking-tight text-foreground">
+            <span className={`font-[family-name:var(--font-indie-flower)] text-xl font-bold tracking-tight ${isDashboard ? "text-white" : "text-foreground"}`}>
               Oh My
               <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
                 {" "}NailArt
@@ -105,19 +107,21 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Center: Nav Links (desktop) */}
-          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="relative px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground group"
-              >
-                {link.label}
-                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-0 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 transition-all duration-300 group-hover:w-5" />
-              </a>
-            ))}
-          </div>
+          {/* Center: Nav Links (desktop) - only on landing */}
+          {!isDashboard && (
+            <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="relative px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground group"
+                >
+                  {link.label}
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-0 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 transition-all duration-300 group-hover:w-5" />
+                </a>
+              ))}
+            </div>
+          )}
 
           {/* Right: CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
@@ -153,7 +157,7 @@ export default function Navbar() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setProfileOpen(!profileOpen)}
-                  className="flex items-center gap-2 rounded-xl border border-border/50 bg-background/80 px-3 py-1.5 transition-colors hover:bg-muted/50 cursor-pointer"
+                  className={`flex items-center gap-2 rounded-xl border px-3 py-1.5 transition-colors cursor-pointer ${isDashboard ? "border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.08]" : "border-border/50 bg-background/80 hover:bg-muted/50"}`}
                 >
                   <img
                     src={user.user_metadata?.avatar_url || ""}
@@ -161,7 +165,7 @@ export default function Navbar() {
                     className="w-7 h-7 rounded-full"
                     referrerPolicy="no-referrer"
                   />
-                  <span className="text-sm font-medium text-foreground max-w-[120px] truncate">
+                  <span className={`text-sm font-medium max-w-[120px] truncate ${isDashboard ? "text-white" : "text-foreground"}`}>
                     {user.user_metadata?.full_name || user.email}
                   </span>
                 </motion.button>
@@ -173,17 +177,17 @@ export default function Navbar() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 4, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute right-0 mt-2 w-48 rounded-xl border border-border/50 bg-background/90 p-1.5 shadow-lg backdrop-blur-xl"
+                      className={`absolute right-0 mt-2 w-48 rounded-xl border p-1.5 shadow-lg backdrop-blur-xl ${isDashboard ? "border-white/[0.08] bg-[#222]/95" : "border-border/50 bg-background/90"}`}
                     >
-                      <div className="px-3 py-2 border-b border-border/50 mb-1">
-                        <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                      <div className={`px-3 py-2 border-b mb-1 ${isDashboard ? "border-white/[0.08]" : "border-border/50"}`}>
+                        <p className={`text-xs truncate ${isDashboard ? "text-white/50" : "text-muted-foreground"}`}>{user.email}</p>
                       </div>
                       <button
                         onClick={async () => {
                           await signOut();
                           setProfileOpen(false);
                         }}
-                        className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
+                        className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors cursor-pointer ${isDashboard ? "text-white/50 hover:bg-white/[0.06] hover:text-white" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
                       >
                         <LogOut size={14} />
                         Sign out
@@ -197,7 +201,7 @@ export default function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              className={`md:hidden flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${isDashboard ? "text-white/50 hover:text-white hover:bg-white/[0.06]" : "text-muted-foreground hover:text-foreground hover:bg-muted"}`}
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
@@ -216,8 +220,8 @@ export default function Navbar() {
           transition={{ duration: 0.25, ease: "easeInOut" }}
           className="md:hidden overflow-hidden"
         >
-          <div className="mt-2 flex flex-col gap-1 rounded-2xl border border-border/50 bg-background/80 p-3 shadow-lg shadow-black/[0.03] backdrop-blur-xl">
-            {navLinks.map((link) => (
+          <div className={`mt-2 flex flex-col gap-1 rounded-2xl border p-3 shadow-lg backdrop-blur-xl ${isDashboard ? "border-white/[0.06] bg-[#1e1e1e]/95 shadow-black/20" : "border-border/50 bg-background/80 shadow-black/[0.03]"}`}>
+            {!isDashboard && navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -227,7 +231,7 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <div className="mt-1 border-t border-border/50 pt-2">
+            <div className={`${isDashboard ? "" : "mt-1"} border-t pt-2 ${isDashboard ? "border-white/[0.06]" : "border-border/50"}`}>
               {!loading && !user && (
                 <a
                   href="/auth"
@@ -247,10 +251,10 @@ export default function Navbar() {
                       referrerPolicy="no-referrer"
                     />
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-foreground truncate">
+                      <p className={`text-sm font-medium truncate ${isDashboard ? "text-white" : "text-foreground"}`}>
                         {user.user_metadata?.full_name || user.email}
                       </p>
-                      <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                      <p className={`text-xs truncate ${isDashboard ? "text-white/40" : "text-muted-foreground"}`}>{user.email}</p>
                     </div>
                   </div>
                   <button
@@ -258,7 +262,7 @@ export default function Navbar() {
                       await signOut();
                       setMobileOpen(false);
                     }}
-                    className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
+                    className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm transition-colors cursor-pointer ${isDashboard ? "text-white/50 hover:bg-white/[0.06] hover:text-white" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
                   >
                     <LogOut size={14} />
                     Sign out

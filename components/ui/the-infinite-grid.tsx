@@ -83,9 +83,9 @@ export const HeroContent = () => {
           </div>
 
           <div className="flex pointer-events-auto justify-center md:justify-start">
-            <button className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 text-white font-semibold shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all active:scale-95">
+            <a href="/auth" className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 text-white font-semibold shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all active:scale-95">
               Get Started
-            </button>
+            </a>
           </div>
         </div>
 
