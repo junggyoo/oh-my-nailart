@@ -1,8 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu, X, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -71,7 +73,12 @@ function NailArtLogo() {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const { user, loading, signOut } = useAuth();
+
+  if (pathname.startsWith("/auth")) return null;
 
   return (
     <motion.header
@@ -114,29 +121,78 @@ export default function Navbar() {
 
           {/* Right: CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
-            <motion.a
-              href="#get-started"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="hidden sm:inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-5 py-2 text-sm font-semibold text-white shadow-md shadow-orange-500/20 transition-shadow hover:shadow-lg hover:shadow-orange-500/30"
-            >
-              Get Started
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                className="transition-transform group-hover:translate-x-0.5"
+            {!loading && !user && (
+              <motion.a
+                href="/auth"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="hidden sm:inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-5 py-2 text-sm font-semibold text-white shadow-md shadow-orange-500/20 transition-shadow hover:shadow-lg hover:shadow-orange-500/30"
               >
-                <path
-                  d="M1 7h12m0 0L8.5 2.5M13 7l-4.5 4.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </motion.a>
+                Get Started
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  className="transition-transform group-hover:translate-x-0.5"
+                >
+                  <path
+                    d="M1 7h12m0 0L8.5 2.5M13 7l-4.5 4.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </motion.a>
+            )}
+
+            {!loading && user && (
+              <div className="relative hidden sm:block">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="flex items-center gap-2 rounded-xl border border-border/50 bg-background/80 px-3 py-1.5 transition-colors hover:bg-muted/50 cursor-pointer"
+                >
+                  <img
+                    src={user.user_metadata?.avatar_url || ""}
+                    alt="avatar"
+                    className="w-7 h-7 rounded-full"
+                    referrerPolicy="no-referrer"
+                  />
+                  <span className="text-sm font-medium text-foreground max-w-[120px] truncate">
+                    {user.user_metadata?.full_name || user.email}
+                  </span>
+                </motion.button>
+
+                <AnimatePresence>
+                  {profileOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 4, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-2 w-48 rounded-xl border border-border/50 bg-background/90 p-1.5 shadow-lg backdrop-blur-xl"
+                    >
+                      <div className="px-3 py-2 border-b border-border/50 mb-1">
+                        <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                      </div>
+                      <button
+                        onClick={async () => {
+                          await signOut();
+                          setProfileOpen(false);
+                        }}
+                        className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
+                      >
+                        <LogOut size={14} />
+                        Sign out
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
 
             {/* Mobile menu button */}
             <button
@@ -172,13 +228,43 @@ export default function Navbar() {
               </a>
             ))}
             <div className="mt-1 border-t border-border/50 pt-2">
-              <a
-                href="#get-started"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-500/20"
-              >
-                Get Started
-              </a>
+              {!loading && !user && (
+                <a
+                  href="/auth"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-500/20"
+                >
+                  Get Started
+                </a>
+              )}
+              {!loading && user && (
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center gap-2 px-4 py-2">
+                    <img
+                      src={user.user_metadata?.avatar_url || ""}
+                      alt="avatar"
+                      className="w-7 h-7 rounded-full"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-foreground truncate">
+                        {user.user_metadata?.full_name || user.email}
+                      </p>
+                      <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      await signOut();
+                      setMobileOpen(false);
+                    }}
+                    className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
+                  >
+                    <LogOut size={14} />
+                    Sign out
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
