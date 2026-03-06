@@ -13,7 +13,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.replace("/auth");
+      router.replace("/");
     }
   }, [user, loading, router]);
 

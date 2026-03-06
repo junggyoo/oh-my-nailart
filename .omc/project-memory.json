@@ -134,15 +134,21 @@
       "type": "file"
     },
     {
+      "path": "app/dashboard/page.tsx",
+      "accessCount": 12,
+      "lastAccessed": 1772625129366,
+      "type": "file"
+    },
+    {
       "path": "app/page.tsx",
       "accessCount": 11,
       "lastAccessed": 1772624877844,
       "type": "file"
     },
     {
-      "path": "app/dashboard/page.tsx",
-      "accessCount": 10,
-      "lastAccessed": 1772624956607,
+      "path": "components/dashboard/navbar.tsx",
+      "accessCount": 9,
+      "lastAccessed": 1772625109816,
       "type": "file"
     },
     {
@@ -158,15 +164,9 @@
       "type": "file"
     },
     {
-      "path": "components/dashboard/navbar.tsx",
-      "accessCount": 8,
-      "lastAccessed": 1772624881110,
-      "type": "file"
-    },
-    {
       "path": "contexts/AuthContext.tsx",
-      "accessCount": 7,
-      "lastAccessed": 1772624878615,
+      "accessCount": 8,
+      "lastAccessed": 1772625109216,
       "type": "file"
     },
     {
