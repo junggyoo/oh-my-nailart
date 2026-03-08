@@ -197,10 +197,13 @@ const toolsList = [
 ];
 
 // --- PromptArea Component ---
-export const PromptArea = React.forwardRef<
-  HTMLTextAreaElement,
-  React.TextareaHTMLAttributes<HTMLTextAreaElement>
->(({ className, ...props }, ref) => {
+interface PromptAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  onPromptSubmit?: (data: { prompt: string; imageData: string | null; tool: string | null }) => void;
+  isLoading?: boolean;
+}
+
+export const PromptArea = React.forwardRef<HTMLTextAreaElement, PromptAreaProps>(
+  ({ className, onPromptSubmit, isLoading, ...props }, ref) => {
   const internalTextareaRef = React.useRef<HTMLTextAreaElement>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [value, setValue] = React.useState("");
@@ -246,6 +249,21 @@ export const PromptArea = React.forwardRef<
     setImagePreview(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
+    }
+  };
+
+  const handleSubmit = () => {
+    if ((!value.trim() && !imagePreview) || isLoading) return;
+    onPromptSubmit?.({ prompt: value.trim(), imageData: imagePreview, tool: selectedTool });
+    setValue("");
+    setImagePreview(null);
+    setSelectedTool(null);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
     }
   };
 
@@ -309,6 +327,7 @@ export const PromptArea = React.forwardRef<
         value={value}
         onChange={handleInputChange}
         placeholder="Describe your thumbnail idea..."
+        onKeyDown={handleKeyDown}
         className="custom-scrollbar w-full resize-none border-0 bg-transparent p-3 text-foreground dark:text-white placeholder:text-muted-foreground dark:placeholder:text-gray-400 focus:ring-0 focus-visible:outline-none min-h-12"
         {...props}
       />
@@ -406,11 +425,16 @@ export const PromptArea = React.forwardRef<
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
-                    type="submit"
-                    disabled={!hasValue}
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={!hasValue || isLoading}
                     className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none bg-black text-white hover:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/80 disabled:bg-black/40 dark:disabled:bg-[#515151]"
                   >
-                    <SendIcon className="h-6 w-6 text-bold" />
+                    {isLoading ? (
+                      <div className="h-5 w-5 rounded-full border-2 border-current border-t-transparent animate-spin" />
+                    ) : (
+                      <SendIcon className="h-6 w-6 text-bold" />
+                    )}
                     <span className="sr-only">Send message</span>
                   </button>
                 </TooltipTrigger>

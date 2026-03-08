@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1772611628311,
+  "lastScanned": 1772962235705,
   "projectRoot": "/Users/jungq/Study/nailart",
   "techStack": {
     "languages": [
@@ -54,8 +54,8 @@
     }
   },
   "conventions": {
-    "namingStyle": null,
-    "importStyle": null,
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
     "testPattern": null,
     "fileOrganization": null
   },
@@ -64,9 +64,14 @@
     "workspaces": [],
     "mainDirectories": [
       "app",
+      "components",
+      "lib",
       "public"
     ],
-    "gitBranches": null
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
   },
   "customNotes": [],
   "directoryMap": {
@@ -74,7 +79,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 4,
-      "lastAccessed": 1772611628297,
+      "lastAccessed": 1772962235662,
       "keyFiles": [
         "favicon.ico",
         "globals.css",
@@ -82,171 +87,46 @@
         "page.tsx"
       ]
     },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 0,
+      "lastAccessed": 1772962235663,
+      "keyFiles": []
+    },
+    "contexts": {
+      "path": "contexts",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1772962235666,
+      "keyFiles": [
+        "AuthContext.tsx"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 1,
+      "lastAccessed": 1772962235682,
+      "keyFiles": [
+        "utils.ts"
+      ]
+    },
     "public": {
       "path": "public",
       "purpose": "Public files",
       "fileCount": 0,
-      "lastAccessed": 1772611628297,
+      "lastAccessed": 1772962235684,
+      "keyFiles": []
+    },
+    "app/api": {
+      "path": "app/api",
+      "purpose": "API routes",
+      "fileCount": 0,
+      "lastAccessed": 1772962235685,
       "keyFiles": []
     }
   },
-  "hotPaths": [
-    {
-      "path": "components/ui/the-infinite-grid.tsx",
-      "accessCount": 31,
-      "lastAccessed": 1772624887038,
-      "type": "file"
-    },
-    {
-      "path": "components/main/navbar.tsx",
-      "accessCount": 25,
-      "lastAccessed": 1772624880938,
-      "type": "file"
-    },
-    {
-      "path": "app/layout.tsx",
-      "accessCount": 18,
-      "lastAccessed": 1772624877642,
-      "type": "file"
-    },
-    {
-      "path": "components/ui/prompt-area.tsx",
-      "accessCount": 18,
-      "lastAccessed": 1772624881353,
-      "type": "file"
-    },
-    {
-      "path": "app/auth/page.tsx",
-      "accessCount": 17,
-      "lastAccessed": 1772624878072,
-      "type": "file"
-    },
-    {
-      "path": "app/globals.css",
-      "accessCount": 15,
-      "lastAccessed": 1772624884357,
-      "type": "file"
-    },
-    {
-      "path": "components/main/hero.tsx",
-      "accessCount": 14,
-      "lastAccessed": 1772624880703,
-      "type": "file"
-    },
-    {
-      "path": "app/dashboard/page.tsx",
-      "accessCount": 12,
-      "lastAccessed": 1772625129366,
-      "type": "file"
-    },
-    {
-      "path": "app/page.tsx",
-      "accessCount": 11,
-      "lastAccessed": 1772624877844,
-      "type": "file"
-    },
-    {
-      "path": "components/dashboard/navbar.tsx",
-      "accessCount": 9,
-      "lastAccessed": 1772625109816,
-      "type": "file"
-    },
-    {
-      "path": "components",
-      "accessCount": 8,
-      "lastAccessed": 1772614786031,
-      "type": "directory"
-    },
-    {
-      "path": "package.json",
-      "accessCount": 8,
-      "lastAccessed": 1772624872807,
-      "type": "file"
-    },
-    {
-      "path": "contexts/AuthContext.tsx",
-      "accessCount": 8,
-      "lastAccessed": 1772625109216,
-      "type": "file"
-    },
-    {
-      "path": "app/auth/callback/route.ts",
-      "accessCount": 4,
-      "lastAccessed": 1772624878278,
-      "type": "file"
-    },
-    {
-      "path": "lib/utils.ts",
-      "accessCount": 4,
-      "lastAccessed": 1772624883921,
-      "type": "file"
-    },
-    {
-      "path": "components.json",
-      "accessCount": 4,
-      "lastAccessed": 1772624884152,
-      "type": "file"
-    },
-    {
-      "path": "components/ui/border-beam.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1772624887239,
-      "type": "file"
-    },
-    {
-      "path": "tsconfig.json",
-      "accessCount": 3,
-      "lastAccessed": 1772624873200,
-      "type": "file"
-    },
-    {
-      "path": "next.config.ts",
-      "accessCount": 3,
-      "lastAccessed": 1772624873524,
-      "type": "file"
-    },
-    {
-      "path": ".env.local",
-      "accessCount": 3,
-      "lastAccessed": 1772624875992,
-      "type": "file"
-    },
-    {
-      "path": "lib/supabase/client.ts",
-      "accessCount": 3,
-      "lastAccessed": 1772624883709,
-      "type": "file"
-    },
-    {
-      "path": "lib/supabase/server.ts",
-      "accessCount": 3,
-      "lastAccessed": 1772624883916,
-      "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 2,
-      "lastAccessed": 1772614801245,
-      "type": "directory"
-    },
-    {
-      "path": "postcss.config.mjs",
-      "accessCount": 2,
-      "lastAccessed": 1772624890836,
-      "type": "file"
-    },
-    {
-      "path": ".mcp.json",
-      "accessCount": 1,
-      "lastAccessed": 1772619074630,
-      "type": "file"
-    },
-    {
-      "path": "eslint.config.mjs",
-      "accessCount": 1,
-      "lastAccessed": 1772624890895,
-      "type": "file"
-    }
-  ],
+  "hotPaths": [],
   "userDirectives": []
 }
