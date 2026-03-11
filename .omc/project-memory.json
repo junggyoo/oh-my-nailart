@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1772962235705,
+  "lastScanned": 1773220900498,
   "projectRoot": "/Users/jungq/Study/nailart",
   "techStack": {
     "languages": [
@@ -79,7 +79,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 4,
-      "lastAccessed": 1772962235662,
+      "lastAccessed": 1773220900486,
       "keyFiles": [
         "favicon.ico",
         "globals.css",
@@ -91,14 +91,14 @@
       "path": "components",
       "purpose": "UI components",
       "fileCount": 0,
-      "lastAccessed": 1772962235663,
+      "lastAccessed": 1773220900487,
       "keyFiles": []
     },
     "contexts": {
       "path": "contexts",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1772962235666,
+      "lastAccessed": 1773220900488,
       "keyFiles": [
         "AuthContext.tsx"
       ]
@@ -107,7 +107,7 @@
       "path": "lib",
       "purpose": "Library code",
       "fileCount": 1,
-      "lastAccessed": 1772962235682,
+      "lastAccessed": 1773220900488,
       "keyFiles": [
         "utils.ts"
       ]
@@ -116,17 +116,162 @@
       "path": "public",
       "purpose": "Public files",
       "fileCount": 0,
-      "lastAccessed": 1772962235684,
+      "lastAccessed": 1773220900488,
       "keyFiles": []
     },
     "app/api": {
       "path": "app/api",
       "purpose": "API routes",
       "fileCount": 0,
-      "lastAccessed": 1772962235685,
+      "lastAccessed": 1773220900488,
       "keyFiles": []
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "app/api/webhooks/polar/route.ts",
+      "accessCount": 20,
+      "lastAccessed": 1773227502281,
+      "type": "file"
+    },
+    {
+      "path": "components/dashboard/pricing-modal.tsx",
+      "accessCount": 17,
+      "lastAccessed": 1773227506502,
+      "type": "file"
+    },
+    {
+      "path": "contexts/AuthContext.tsx",
+      "accessCount": 16,
+      "lastAccessed": 1773227652071,
+      "type": "file"
+    },
+    {
+      "path": "components/dashboard/navbar.tsx",
+      "accessCount": 11,
+      "lastAccessed": 1773227652082,
+      "type": "file"
+    },
+    {
+      "path": "app/api/checkout/route.ts",
+      "accessCount": 8,
+      "lastAccessed": 1773227502091,
+      "type": "file"
+    },
+    {
+      "path": "app/api/generate-image/route.ts",
+      "accessCount": 8,
+      "lastAccessed": 1773227651451,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 6,
+      "lastAccessed": 1773227521999,
+      "type": "directory"
+    },
+    {
+      "path": ".env.local",
+      "accessCount": 4,
+      "lastAccessed": 1773227201170,
+      "type": "file"
+    },
+    {
+      "path": "app/dashboard/page.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1773227670203,
+      "type": "file"
+    },
+    {
+      "path": "lib/supabase/server.ts",
+      "accessCount": 3,
+      "lastAccessed": 1773227495185,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 3,
+      "lastAccessed": 1773227501696,
+      "type": "file"
+    },
+    {
+      "path": "lib/supabase/client.ts",
+      "accessCount": 2,
+      "lastAccessed": 1773227495103,
+      "type": "file"
+    },
+    {
+      "path": "lib/prompts/thumbnail-system.ts",
+      "accessCount": 2,
+      "lastAccessed": 1773227501860,
+      "type": "file"
+    },
+    {
+      "path": "components/dashboard/gallery-sidebar.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1773227502620,
+      "type": "file"
+    },
+    {
+      "path": "app/api/customer-portal/route.ts",
+      "accessCount": 2,
+      "lastAccessed": 1773227505881,
+      "type": "file"
+    },
+    {
+      "path": "app/api/gallery/route.ts",
+      "accessCount": 2,
+      "lastAccessed": 1773227506052,
+      "type": "file"
+    },
+    {
+      "path": "app/layout.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1773227512009,
+      "type": "file"
+    },
+    {
+      "path": "app/auth/callback/route.ts",
+      "accessCount": 2,
+      "lastAccessed": 1773227517517,
+      "type": "file"
+    },
+    {
+      "path": "next.config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773223045695,
+      "type": "file"
+    },
+    {
+      "path": "lib/utils.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773223045927,
+      "type": "file"
+    },
+    {
+      "path": "tsconfig.json",
+      "accessCount": 1,
+      "lastAccessed": 1773223051927,
+      "type": "file"
+    },
+    {
+      "path": "app/auth/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773227517739,
+      "type": "file"
+    },
+    {
+      "path": "components/main/navbar.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773227517959,
+      "type": "file"
+    },
+    {
+      "path": "components/ui/prompt-area.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773227524975,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }

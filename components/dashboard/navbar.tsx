@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LogOut } from "lucide-react";
+import { LogOut, Sparkles, CreditCard, Coins } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import PricingModal from "@/components/dashboard/pricing-modal";
 
 function NailArtLogo() {
   return (
@@ -26,8 +27,10 @@ function NailArtLogo() {
 }
 
 export default function DashboardNavbar() {
-  const { user, signOut } = useAuth();
+  const { user, plan, credits, signOut } = useAuth();
+  const [portalLoading, setPortalLoading] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [pricingOpen, setPricingOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,19 +48,20 @@ export default function DashboardNavbar() {
   if (!user) return null;
 
   return (
+    <>
     <motion.header
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className="mx-auto max-w-6xl px-4 pt-4 flex items-center justify-between">
+      <div className="mx-auto max-w-6xl px-4 pl-14 lg:pl-4 pt-4 flex items-center justify-between">
         {/* Logo - floating pill */}
         <motion.a
           href="/dashboard"
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
-          className="flex items-center gap-2 rounded-2xl border border-border/50 bg-background/60 px-4 py-2.5 backdrop-blur-xl shadow-lg shadow-black/[0.03] transition-colors hover:border-border hover:bg-background/80"
+          className="flex items-center gap-2 px-2 py-2 transition-opacity hover:opacity-80"
         >
           <NailArtLogo />
           <span className="font-[family-name:var(--font-indie-flower)] text-base font-bold tracking-tight text-foreground">
@@ -74,7 +78,7 @@ export default function DashboardNavbar() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={() => setProfileOpen(!profileOpen)}
-            className="flex items-center gap-2.5 rounded-2xl border border-border/50 bg-background/60 px-3 py-2 backdrop-blur-xl shadow-lg shadow-black/[0.03] transition-colors hover:border-border hover:bg-background/80 cursor-pointer"
+            className="flex items-center gap-2.5 px-2 py-2 transition-opacity hover:opacity-80 cursor-pointer"
           >
             <img
               src={user.user_metadata?.avatar_url || ""}
@@ -112,6 +116,58 @@ export default function DashboardNavbar() {
                   </div>
                 </div>
 
+                {/* Plan & Credits */}
+                <div className="flex items-center justify-between px-3 py-2 mb-1 border-b border-border/50">
+                  <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${
+                    plan === "ultra"
+                      ? "bg-purple-500/15 text-purple-600 dark:text-purple-400"
+                      : plan === "pro"
+                      ? "bg-orange-500/15 text-orange-600 dark:text-orange-400"
+                      : "bg-muted text-muted-foreground"
+                  }`}>
+                    {plan === "free" ? "Free" : plan === "pro" ? "Pro" : "Ultra"}
+                  </span>
+                  <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Coins size={12} />
+                    <span className="font-medium">{credits}</span> credits
+                  </span>
+                </div>
+
+                {plan === "free" ? (
+                  <button
+                    onClick={() => {
+                      setProfileOpen(false);
+                      setPricingOpen(true);
+                    }}
+                    className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium bg-gradient-to-r from-orange-500/10 to-rose-500/10 text-orange-600 dark:text-orange-400 hover:from-orange-500/20 hover:to-rose-500/20 transition-all cursor-pointer"
+                  >
+                    <Sparkles size={14} />
+                    Upgrade
+                  </button>
+                ) : (
+                  <button
+                    onClick={async () => {
+                      setPortalLoading(true);
+                      try {
+                        const res = await fetch("/api/customer-portal", { method: "POST" });
+                        const data = await res.json();
+                        if (!res.ok) throw new Error(data.error);
+                        window.location.href = data.url;
+                      } catch (error) {
+                        console.error("Failed to open customer portal:", error);
+                      } finally {
+                        setPortalLoading(false);
+                        setProfileOpen(false);
+                      }
+                    }}
+                    disabled={portalLoading}
+                    className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer disabled:opacity-60"
+                  >
+                    <CreditCard size={14} />
+                    {portalLoading ? "Loading..." : "Manage Subscription"}
+                  </button>
+                )}
+
                 {/* Sign out */}
                 <button
                   onClick={async () => {
@@ -129,5 +185,8 @@ export default function DashboardNavbar() {
         </div>
       </div>
     </motion.header>
+
+    <PricingModal open={pricingOpen} onClose={() => setPricingOpen(false)} />
+    </>
   );
 }

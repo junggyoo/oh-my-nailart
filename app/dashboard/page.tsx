@@ -25,7 +25,7 @@ interface SavedImage {
 }
 
 export default function DashboardPage() {
-  const { user, loading } = useAuth();
+  const { user, loading, refreshCredits } = useAuth();
   const router = useRouter();
   const [results, setResults] = useState<GeneratedResult[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -105,6 +105,8 @@ export default function DashboardPage() {
       );
     } finally {
       setIsGenerating(false);
+      // Refresh credits in UI after generation
+      refreshCredits();
       // Refresh saved images from Supabase after generation
       fetch("/api/gallery")
         .then((res) => res.json())

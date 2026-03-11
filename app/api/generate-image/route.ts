@@ -19,14 +19,47 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Credit deduction logic
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "로그인이 필요합니다." },
+        { status: 401 }
+      );
+    }
+
+    // Check credits and deduct 1
+    const { data: userData } = await supabase
+      .from("users")
+      .select("credits")
+      .eq("id", user.id)
+      .single();
+
+    if (!userData || userData.credits <= 0) {
+      return NextResponse.json(
+        { error: "크레딧이 부족합니다. 플랜을 업그레이드해주세요." },
+        { status: 403 }
+      );
+    }
+
+    // Deduct 1 credit before generation
+    await supabase
+      .from("users")
+      .update({ credits: userData.credits - 1 })
+      .eq("id", user.id);
+
     // Build contents array with system prompt prepended
     const contents: Array<
       { text: string } | { inlineData: { mimeType: string; data: string } }
     > = [];
 
+    const PHOTO_REMINDER = "\n\nREMINDER: Output a photorealistic DSLR photograph. No cartoon/illustration/webtoon styles.";
+
     const fullPrompt = prompt
-      ? `${THUMBNAIL_SYSTEM_PROMPT}\n\n---\nUser Request: ${prompt}`
-      : THUMBNAIL_SYSTEM_PROMPT;
+      ? `${THUMBNAIL_SYSTEM_PROMPT}\n\n---\nUser Request: ${prompt}${PHOTO_REMINDER}`
+      : `${THUMBNAIL_SYSTEM_PROMPT}${PHOTO_REMINDER}`;
 
     contents.push({ text: fullPrompt });
 
@@ -43,12 +76,14 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-pro-image-preview",
+      model: process.env.GEMINI_MODEL || "gemini-3-pro-image-preview",
       contents: contents,
       config: {
+        temperature: 0.5,
         responseModalities: ["TEXT", "IMAGE"],
         imageConfig: {
           aspectRatio: "16:9",
+          imageSize: "2K",
         },
       },
     });
@@ -66,6 +101,12 @@ export async function POST(req: NextRequest) {
     }
 
     if (!result.text && !result.image) {
+      // Refund 1 credit on generation failure
+      await supabase
+        .from("users")
+        .update({ credits: userData.credits })
+        .eq("id", user.id);
+
       return NextResponse.json(
         { error: "이미지를 생성하지 못했습니다. 다른 프롬프트를 시도해주세요." },
         { status: 500 }
@@ -73,12 +114,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Save generated image to Supabase
-    // Prepare supabase client & user within request context (cookies available here)
     if (result.image) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-
-      if (user) {
         const base64Match = result.image.match(/^data:(.+?);base64,(.+)$/);
         if (base64Match) {
           const mimeType = base64Match[1];
@@ -109,12 +145,33 @@ export async function POST(req: NextRequest) {
             })
             .catch((err) => console.error("Failed to save image:", err));
         }
-      }
     }
 
     return NextResponse.json(result);
   } catch (error: unknown) {
     console.error("Image generation error:", error);
+
+    // Refund 1 credit on error
+    try {
+      const supabaseForRefund = await createClient();
+      const { data: { user: refundUser } } = await supabaseForRefund.auth.getUser();
+      if (refundUser) {
+        const { data: current } = await supabaseForRefund
+          .from("users")
+          .select("credits")
+          .eq("id", refundUser.id)
+          .single();
+        if (current) {
+          await supabaseForRefund
+            .from("users")
+            .update({ credits: current.credits + 1 })
+            .eq("id", refundUser.id);
+        }
+      }
+    } catch (refundErr) {
+      console.error("Failed to refund credit:", refundErr);
+    }
+
     const message =
       error instanceof Error
         ? error.message
