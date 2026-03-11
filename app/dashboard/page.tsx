@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import DashboardNavbar from "@/components/dashboard/navbar";
 import GallerySidebar from "@/components/dashboard/gallery-sidebar";
+import PricingModal from "@/components/dashboard/pricing-modal";
 import { PromptArea } from "@/components/ui/prompt-area";
 
 interface GeneratedResult {
@@ -30,6 +31,7 @@ export default function DashboardPage() {
   const [results, setResults] = useState<GeneratedResult[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [savedImages, setSavedImages] = useState<SavedImage[]>([]);
+  const [pricingOpen, setPricingOpen] = useState(false);
   const resultsEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -81,6 +83,12 @@ export default function DashboardPage() {
       const result = await res.json();
 
       if (!res.ok) {
+        if (res.status === 403) {
+          // Credit insufficient — remove loading card and show pricing modal
+          setResults((prev) => prev.filter((r) => r.id !== id));
+          setPricingOpen(true);
+          return;
+        }
         setResults((prev) =>
           prev.map((r) =>
             r.id === id ? { ...r, loading: false, error: result.error } : r
@@ -135,8 +143,12 @@ export default function DashboardPage() {
     prompt: img.prompt,
   }));
 
-  // Session images first (newest), then persisted (already ordered by created_at desc)
-  const galleryImages = [...sessionImages, ...persistedImages];
+  // Session images first (newest), then persisted (deduplicated)
+  const sessionPrompts = new Set(sessionImages.map((img) => img.prompt));
+  const galleryImages = [
+    ...sessionImages,
+    ...persistedImages.filter((img) => !sessionPrompts.has(img.prompt)),
+  ];
 
   if (loading) {
     return (
@@ -180,6 +192,7 @@ export default function DashboardPage() {
         </svg>
       </div>
 
+      <PricingModal open={pricingOpen} onClose={() => setPricingOpen(false)} />
       <DashboardNavbar />
 
       <GallerySidebar

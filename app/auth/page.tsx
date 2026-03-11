@@ -265,11 +265,11 @@ export default function AuthPage() {
               className="mt-6 text-center text-xs text-muted-foreground/70"
             >
               By continuing, you agree to our{" "}
-              <a href="#" className="underline underline-offset-2 hover:text-muted-foreground transition-colors">
+              <a href="/terms" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-muted-foreground transition-colors">
                 Terms of Service
               </a>{" "}
               and{" "}
-              <a href="#" className="underline underline-offset-2 hover:text-muted-foreground transition-colors">
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-muted-foreground transition-colors">
                 Privacy Policy
               </a>
             </motion.p>
