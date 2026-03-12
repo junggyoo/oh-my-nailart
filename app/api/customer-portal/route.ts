@@ -18,6 +18,16 @@ export async function POST() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Ensure customer exists in Polar before creating a session
+    try {
+      await polar.customers.getExternal({ externalId: user.id });
+    } catch {
+      await polar.customers.create({
+        externalId: user.id,
+        email: user.email!,
+      });
+    }
+
     const session = await polar.customerSessions.create({
       externalCustomerId: user.id,
     });

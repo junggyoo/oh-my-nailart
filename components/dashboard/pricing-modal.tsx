@@ -33,15 +33,10 @@ export default function PricingModal({ open, onClose }: PricingModalProps) {
   async function handleCheckout(plan: "pro" | "ultra") {
     setLoading(plan);
     try {
-      const productId =
-        plan === "pro"
-          ? process.env.NEXT_PUBLIC_POLAR_PRO_PRODUCT_ID
-          : process.env.NEXT_PUBLIC_POLAR_ULTRA_PRODUCT_ID;
-
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId }),
+        body: JSON.stringify({ plan }),
       });
 
       const data = await res.json();

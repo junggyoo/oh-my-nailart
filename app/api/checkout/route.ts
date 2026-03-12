@@ -18,11 +18,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { productId } = await req.json();
+    const { plan } = await req.json();
+
+    const productIdMap: Record<string, string | undefined> = {
+      pro: process.env.POLAR_PRO_PRODUCT_ID,
+      ultra: process.env.POLAR_ULTRA_PRODUCT_ID,
+    };
+
+    const productId = productIdMap[plan];
 
     if (!productId) {
       return NextResponse.json(
-        { error: "Product ID is required" },
+        { error: "Invalid plan" },
         { status: 400 }
       );
     }

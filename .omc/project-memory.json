@@ -130,8 +130,44 @@
   "hotPaths": [
     {
       "path": "components/dashboard/navbar.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1773288932478,
+      "accessCount": 5,
+      "lastAccessed": 1773289781309,
+      "type": "file"
+    },
+    {
+      "path": "app/api/customer-portal/route.ts",
+      "accessCount": 3,
+      "lastAccessed": 1773289839107,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 3,
+      "lastAccessed": 1773290551466,
+      "type": "directory"
+    },
+    {
+      "path": "app/api/checkout/route.ts",
+      "accessCount": 3,
+      "lastAccessed": 1773290627739,
+      "type": "file"
+    },
+    {
+      "path": ".vercel/project.json",
+      "accessCount": 1,
+      "lastAccessed": 1773289206073,
+      "type": "file"
+    },
+    {
+      "path": "app/api",
+      "accessCount": 1,
+      "lastAccessed": 1773289817302,
+      "type": "directory"
+    },
+    {
+      "path": "components/dashboard/pricing-modal.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773290635933,
       "type": "file"
     }
   ],
