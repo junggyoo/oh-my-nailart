@@ -55,7 +55,7 @@ export default function DashboardNavbar() {
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className="mx-auto max-w-6xl px-4 pl-14 lg:pl-4 pt-4 flex items-center justify-between">
+      <div className="px-4 pl-14 lg:px-6 pt-4 flex items-center justify-between">
         {/* Logo - floating pill */}
         <motion.a
           href="/dashboard"
