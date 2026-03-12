@@ -130,8 +130,8 @@
   "hotPaths": [
     {
       "path": "app/api/webhooks/polar/route.ts",
-      "accessCount": 20,
-      "lastAccessed": 1773227502281,
+      "accessCount": 21,
+      "lastAccessed": 1773287588564,
       "type": "file"
     },
     {
@@ -142,20 +142,20 @@
     },
     {
       "path": "contexts/AuthContext.tsx",
-      "accessCount": 18,
-      "lastAccessed": 1773228377162,
+      "accessCount": 19,
+      "lastAccessed": 1773287588682,
       "type": "file"
     },
     {
       "path": "components/dashboard/pricing-modal.tsx",
-      "accessCount": 18,
-      "lastAccessed": 1773228382905,
+      "accessCount": 19,
+      "lastAccessed": 1773287591979,
       "type": "file"
     },
     {
       "path": "components/dashboard/navbar.tsx",
-      "accessCount": 12,
-      "lastAccessed": 1773228376530,
+      "accessCount": 13,
+      "lastAccessed": 1773287592144,
       "type": "file"
     },
     {
@@ -172,8 +172,8 @@
     },
     {
       "path": "app/api/checkout/route.ts",
-      "accessCount": 8,
-      "lastAccessed": 1773227502091,
+      "accessCount": 9,
+      "lastAccessed": 1773287588185,
       "type": "file"
     },
     {
@@ -190,9 +190,15 @@
     },
     {
       "path": "",
-      "accessCount": 6,
-      "lastAccessed": 1773227521999,
+      "accessCount": 8,
+      "lastAccessed": 1773287596188,
       "type": "directory"
+    },
+    {
+      "path": ".env.local",
+      "accessCount": 6,
+      "lastAccessed": 1773287633516,
+      "type": "file"
     },
     {
       "path": "components/main/navbar.tsx",
@@ -201,15 +207,9 @@
       "type": "file"
     },
     {
-      "path": ".env.local",
-      "accessCount": 4,
-      "lastAccessed": 1773227201170,
-      "type": "file"
-    },
-    {
       "path": "package.json",
-      "accessCount": 4,
-      "lastAccessed": 1773228370186,
+      "accessCount": 5,
+      "lastAccessed": 1773287588759,
       "type": "file"
     },
     {
@@ -231,6 +231,24 @@
       "type": "file"
     },
     {
+      "path": "app/auth/page.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1773277325256,
+      "type": "file"
+    },
+    {
+      "path": "lib/supabase/client.ts",
+      "accessCount": 4,
+      "lastAccessed": 1773287604227,
+      "type": "file"
+    },
+    {
+      "path": "app/api/customer-portal/route.ts",
+      "accessCount": 4,
+      "lastAccessed": 1773287632462,
+      "type": "file"
+    },
+    {
       "path": "lib/supabase/server.ts",
       "accessCount": 3,
       "lastAccessed": 1773227495185,
@@ -249,21 +267,9 @@
       "type": "file"
     },
     {
-      "path": "lib/supabase/client.ts",
-      "accessCount": 3,
-      "lastAccessed": 1773228382212,
-      "type": "file"
-    },
-    {
       "path": "app/privacy/page.tsx",
       "accessCount": 3,
       "lastAccessed": 1773228510650,
-      "type": "file"
-    },
-    {
-      "path": "app/auth/page.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1773228683154,
       "type": "file"
     },
     {
@@ -273,27 +279,21 @@
       "type": "file"
     },
     {
+      "path": "app/auth/callback/route.ts",
+      "accessCount": 3,
+      "lastAccessed": 1773277325581,
+      "type": "file"
+    },
+    {
       "path": "lib/prompts/thumbnail-system.ts",
       "accessCount": 2,
       "lastAccessed": 1773227501860,
       "type": "file"
     },
     {
-      "path": "app/api/customer-portal/route.ts",
-      "accessCount": 2,
-      "lastAccessed": 1773227505881,
-      "type": "file"
-    },
-    {
       "path": "app/api/gallery/route.ts",
       "accessCount": 2,
       "lastAccessed": 1773227506052,
-      "type": "file"
-    },
-    {
-      "path": "app/auth/callback/route.ts",
-      "accessCount": 2,
-      "lastAccessed": 1773227517517,
       "type": "file"
     },
     {
@@ -367,7 +367,25 @@
       "accessCount": 1,
       "lastAccessed": 1773229661376,
       "type": "file"
+    },
+    {
+      "path": "public/logo.svg",
+      "accessCount": 1,
+      "lastAccessed": 1773279399647,
+      "type": "file"
+    },
+    {
+      "path": "public/logo.png",
+      "accessCount": 1,
+      "lastAccessed": 1773279427036,
+      "type": "file"
+    },
+    {
+      "path": "app/api",
+      "accessCount": 1,
+      "lastAccessed": 1773287601657,
+      "type": "directory"
     }
   ],
   "userDirectives": []
-}
+}}
