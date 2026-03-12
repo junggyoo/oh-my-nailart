@@ -86,9 +86,6 @@ export default function DashboardNavbar() {
               className="w-7 h-7 rounded-full ring-1 ring-border"
               referrerPolicy="no-referrer"
             />
-            <span className="text-sm font-medium text-foreground max-w-[120px] truncate hidden sm:block">
-              {user.user_metadata?.full_name || user.email}
-            </span>
           </motion.button>
 
           <AnimatePresence>

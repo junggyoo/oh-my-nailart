@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1773220900498,
+  "lastScanned": 1773288316044,
   "projectRoot": "/Users/jungq/Study/nailart",
   "techStack": {
     "languages": [
@@ -79,7 +79,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 4,
-      "lastAccessed": 1773220900486,
+      "lastAccessed": 1773288316031,
       "keyFiles": [
         "favicon.ico",
         "globals.css",
@@ -91,14 +91,14 @@
       "path": "components",
       "purpose": "UI components",
       "fileCount": 0,
-      "lastAccessed": 1773220900487,
+      "lastAccessed": 1773288316034,
       "keyFiles": []
     },
     "contexts": {
       "path": "contexts",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1773220900488,
+      "lastAccessed": 1773288316034,
       "keyFiles": [
         "AuthContext.tsx"
       ]
@@ -107,7 +107,7 @@
       "path": "lib",
       "purpose": "Library code",
       "fileCount": 1,
-      "lastAccessed": 1773220900488,
+      "lastAccessed": 1773288316035,
       "keyFiles": [
         "utils.ts"
       ]
@@ -116,276 +116,24 @@
       "path": "public",
       "purpose": "Public files",
       "fileCount": 0,
-      "lastAccessed": 1773220900488,
+      "lastAccessed": 1773288316035,
       "keyFiles": []
     },
     "app/api": {
       "path": "app/api",
       "purpose": "API routes",
       "fileCount": 0,
-      "lastAccessed": 1773220900488,
+      "lastAccessed": 1773288316035,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "app/api/webhooks/polar/route.ts",
-      "accessCount": 21,
-      "lastAccessed": 1773287588564,
-      "type": "file"
-    },
-    {
-      "path": "app/dashboard/page.tsx",
-      "accessCount": 20,
-      "lastAccessed": 1773230836037,
-      "type": "file"
-    },
-    {
-      "path": "contexts/AuthContext.tsx",
-      "accessCount": 19,
-      "lastAccessed": 1773287588682,
-      "type": "file"
-    },
-    {
-      "path": "components/dashboard/pricing-modal.tsx",
-      "accessCount": 19,
-      "lastAccessed": 1773287591979,
-      "type": "file"
-    },
-    {
       "path": "components/dashboard/navbar.tsx",
-      "accessCount": 13,
-      "lastAccessed": 1773287592144,
-      "type": "file"
-    },
-    {
-      "path": "app/api/generate-image/route.ts",
-      "accessCount": 9,
-      "lastAccessed": 1773227990602,
-      "type": "file"
-    },
-    {
-      "path": "app/page.tsx",
-      "accessCount": 9,
-      "lastAccessed": 1773229667011,
-      "type": "file"
-    },
-    {
-      "path": "app/api/checkout/route.ts",
-      "accessCount": 9,
-      "lastAccessed": 1773287588185,
-      "type": "file"
-    },
-    {
-      "path": "components/main/cta.tsx",
-      "accessCount": 8,
-      "lastAccessed": 1773230233760,
-      "type": "file"
-    },
-    {
-      "path": "components/main/footer.tsx",
-      "accessCount": 8,
-      "lastAccessed": 1773230658896,
-      "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 8,
-      "lastAccessed": 1773287596188,
-      "type": "directory"
-    },
-    {
-      "path": ".env.local",
-      "accessCount": 6,
-      "lastAccessed": 1773287633516,
-      "type": "file"
-    },
-    {
-      "path": "components/main/navbar.tsx",
-      "accessCount": 5,
-      "lastAccessed": 1773229283990,
-      "type": "file"
-    },
-    {
-      "path": "package.json",
-      "accessCount": 5,
-      "lastAccessed": 1773287588759,
-      "type": "file"
-    },
-    {
-      "path": "app/layout.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1773228429009,
-      "type": "file"
-    },
-    {
-      "path": "components/main/hero.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1773229622728,
-      "type": "file"
-    },
-    {
-      "path": "components/ui/the-infinite-grid.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1773229631374,
-      "type": "file"
-    },
-    {
-      "path": "app/auth/page.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1773277325256,
-      "type": "file"
-    },
-    {
-      "path": "lib/supabase/client.ts",
-      "accessCount": 4,
-      "lastAccessed": 1773287604227,
-      "type": "file"
-    },
-    {
-      "path": "app/api/customer-portal/route.ts",
-      "accessCount": 4,
-      "lastAccessed": 1773287632462,
-      "type": "file"
-    },
-    {
-      "path": "lib/supabase/server.ts",
-      "accessCount": 3,
-      "lastAccessed": 1773227495185,
-      "type": "file"
-    },
-    {
-      "path": "components/dashboard/gallery-sidebar.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1773228376767,
-      "type": "file"
-    },
-    {
-      "path": "components/ui/prompt-area.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1773228376910,
-      "type": "file"
-    },
-    {
-      "path": "app/privacy/page.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1773228510650,
-      "type": "file"
-    },
-    {
-      "path": "components/main/pricing.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1773229623145,
-      "type": "file"
-    },
-    {
-      "path": "app/auth/callback/route.ts",
-      "accessCount": 3,
-      "lastAccessed": 1773277325581,
-      "type": "file"
-    },
-    {
-      "path": "lib/prompts/thumbnail-system.ts",
       "accessCount": 2,
-      "lastAccessed": 1773227501860,
+      "lastAccessed": 1773288372393,
       "type": "file"
-    },
-    {
-      "path": "app/api/gallery/route.ts",
-      "accessCount": 2,
-      "lastAccessed": 1773227506052,
-      "type": "file"
-    },
-    {
-      "path": "tsconfig.json",
-      "accessCount": 2,
-      "lastAccessed": 1773228370606,
-      "type": "file"
-    },
-    {
-      "path": "lib/utils.ts",
-      "accessCount": 2,
-      "lastAccessed": 1773228382042,
-      "type": "file"
-    },
-    {
-      "path": "app/globals.css",
-      "accessCount": 2,
-      "lastAccessed": 1773230206767,
-      "type": "file"
-    },
-    {
-      "path": "next.config.ts",
-      "accessCount": 1,
-      "lastAccessed": 1773223045695,
-      "type": "file"
-    },
-    {
-      "path": "components.json",
-      "accessCount": 1,
-      "lastAccessed": 1773228370828,
-      "type": "file"
-    },
-    {
-      "path": "components/ui/border-beam.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1773228382632,
-      "type": "file"
-    },
-    {
-      "path": "app/terms/page.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1773228482525,
-      "type": "file"
-    },
-    {
-      "path": "components/ui/color-bends.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1773229228406,
-      "type": "file"
-    },
-    {
-      "path": "public/main/1.jpg",
-      "accessCount": 1,
-      "lastAccessed": 1773229616688,
-      "type": "file"
-    },
-    {
-      "path": "public/main/2.jpg",
-      "accessCount": 1,
-      "lastAccessed": 1773229617307,
-      "type": "file"
-    },
-    {
-      "path": "public/main/3.jpg",
-      "accessCount": 1,
-      "lastAccessed": 1773229617472,
-      "type": "file"
-    },
-    {
-      "path": "components/main/features.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1773229661376,
-      "type": "file"
-    },
-    {
-      "path": "public/logo.svg",
-      "accessCount": 1,
-      "lastAccessed": 1773279399647,
-      "type": "file"
-    },
-    {
-      "path": "public/logo.png",
-      "accessCount": 1,
-      "lastAccessed": 1773279427036,
-      "type": "file"
-    },
-    {
-      "path": "app/api",
-      "accessCount": 1,
-      "lastAccessed": 1773287601657,
-      "type": "directory"
     }
   ],
   "userDirectives": []
-}}
+}
